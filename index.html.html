@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quizlet Styled UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .sidebar {
+  width: 240px;
+  background-color: #fff;
+  border-right: 1px solid #eee;
+  padding: 20px 16px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+/* Scrollbar styling for sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+    .sidebar .menu {
+      margin-top: 24px;
+    }
+
+    .sidebar .menu h4 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #4e4e4e;
+    }
+
+    .sidebar .menu a {
+      display: block;
+      margin: 6px 0;
+      text-decoration: none;
+      color: #2f2f2f;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .sidebar .menu a:hover,
+    .sidebar .menu .active {
+      background-color: #f0f4ff;
+      color: #3d5afe;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      z-index: 10;
+    }
+
+    .topbar .search {
+      flex: 1;
+      margin-left: 24px;
+      background-color: #f7f8fa;
+      border-radius: 12px;
+      padding: 10px 16px;
+      color: #555;
+    }
+
+    .main {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .card {
+      background-color: #f9fafc;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #222;
+    }
+
+    .upload {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .upload button {
+      background-color: #eaf1ff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .popular {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .flashcard {
+      flex: 1 1 30%;
+      background-color: #fff;
+      border: 1px solid #eee;
+      padding: 12px 16px;
+      border-radius: 12px;
+    }
+
+    .flashcard h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .flashcard span {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .scrollable-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+      color: #3d5afe;
+    }
+
+    /* Scrollbar styling */
+    .main::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .main::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+
+    .main::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    #pomodoro {
+  text-align: center;
+  background: #fff7f7;
+  border: 1px solid #ffdddd;
+}
+
+.timer-display {
+  font-size: 48px;
+  margin: 20px 0;
+  font-weight: bold;
+  color: #3d5afe;
+}
+
+.controls button {
+  margin: 5px;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #3d5afe;
+  color: white;
+}
+
+.controls button:hover {
+  background-color: #1b3fcf;
+}
+
+.message {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #444;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">🔍</div>
+    <div class="menu">
+      <a class="active" href="#">🏠 Home</a>
+      <a href="#">📁 Your library</a>
+      <a href="#">🔔 Notifications</a>
+      <h4>Exams</h4>
+      <a href="#">📚 JEE Main</a>
+      <a href="#">🧪 NEET</a>
+      <h4>Start here</h4>
+      <a href="#">📝 Flashcards</a>
+      <a href="#">📄 Study Guides</a>
+      <a href="#">🧠 Practice Tests</a>
+      <a href="#">📘 Expert solutions</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="logo">Quizlet</div>
+      <input class="search" placeholder="Search for a question" />
+      <button style="background: #3d5afe; color: white; padding: 10px 16px; border-radius: 8px; margin-left: 12px;">Upgrade</button>
+    </div>
+
+    <div class="content">
+      
+      <div class="card" id="pomodoro">
+        <h3>Pomodoro Study Timer ⏱️</h3>
+        <div class="timer-display" id="timer">25:00</div>
+        <div class="controls">
+          <button id="start">▶️ Start</button>
+          <button id="pause">⏸️ Pause</button>
+          <button id="reset">🔄 Reset</button>
+        </div>
+        <div class="message" id="message">Stay focused! You got this 💪</div>
+      </div>
+      
+      <div class="card">
+        <h3>Generate a <a href="#" style="color: #3d5afe; text-decoration: none;">study guide</a></h3>
+        <p>Paste your notes here. We'll do the rest.</p>
+        <div class="upload">
+          <button>📤 Upload a file</button>
+          <span>0/100,000 characters</span>
+        </div>
+      </div>
+
+      <h3>Popular flashcard sets</h3>
+      <div class="popular">
+        <div class="flashcard">
+          <h4>Cellular Respiration</h4>
+          <span>57 terms • mberrios</span>
+        </div>
+        <div class="flashcard">
+          <h4>ASVAB Math</h4>
+          <span>60 terms • Sharon_Mikesell</span>
+        </div>
+        <div class="flashcard">
+          <h4>1000 Most Common German Words</h4>
+          <span>100 terms • CookieMuncher</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  let timer;
+  let time = 25 * 60; // 25 minutes
+  let isRunning = false;
+  let completedPomodoros = 0;
+
+  const timerDisplay = document.getElementById("timer");
+  const message = document.getElementById("message");
+
+  function updateDisplay() {
+    const minutes = Math.floor(time / 60).toString().padStart(2, "0");
+    const seconds = (time % 60).toString().padStart(2, "0");
+    timerDisplay.textContent = `${minutes}:${seconds}`;
+  }
+
+  function startTimer() {
+    if (!isRunning) {
+      timer = setInterval(() => {
+        time--;
+        updateDisplay();
+        if (time <= 0) {
+          clearInterval(timer);
+          isRunning = false;
+          completedPomodoros++;
+          time = 25 * 60;
+          showMotivation();
+          celebrate();
+        }
+      }, 1000);
+      isRunning = true;
+    }
+  }
+
+  function pauseTimer() {
+    clearInterval(timer);
+    isRunning = false;
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    time = 25 * 60;
+    updateDisplay();
+    isRunning = false;
+    message.textContent = "Stay focused! You got this 💪";
+  }
+
+  function showMotivation() {
+    const messages = [
+      "Nice work! Take a 5-minute break ☕",
+      "You're crushing it! 🔥",
+      "Keep up the momentum! 🚀",
+      "Proud of your focus! 👏"
+    ];
+    message.textContent = messages[Math.floor(Math.random() * messages.length)];
+  }
+
+  function celebrate() {
+    const confetti = document.createElement("div");
+    confetti.innerHTML = "🎉🎉🎉";
+    confetti.style.fontSize = "40px";
+    confetti.style.position = "fixed";
+    confetti.style.top = "50%";
+    confetti.style.left = "50%";
+    confetti.style.transform = "translate(-50%, -50%)";
+    confetti.style.zIndex = "1000";
+    document.body.appendChild(confetti);
+    setTimeout(() => document.body.removeChild(confetti), 3000);
+  }
+
+  document.getElementById("start").onclick = startTimer;
+  document.getElementById("pause").onclick = pauseTimer;
+  document.getElementById("reset").onclick = resetTimer;
+
+  updateDisplay();
+</script>
+
+
+</body>
+</html>
+
